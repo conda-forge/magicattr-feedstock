@@ -1,3 +1,4 @@
+{% set python_min = '3.10' %}
 {% set name = "magicattr" %}
 {% set version = "0.1.6" %}
 
@@ -12,21 +13,22 @@ source:
 build:
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
-  number: 0
+  number: 1
 
 requirements:
   host:
-    - python >3.9
+    - python {{ python_min }}
     - setuptools
     - pip
   run:
-    - python >3.9
+    - python >={{ python_min }}
 
 test:
   imports:
     - magicattr
   requires:
     - pip
+    - python {{ python_min }}
   commands:
     - pip check
 
